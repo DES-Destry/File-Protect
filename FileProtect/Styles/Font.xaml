@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:CorLib="clr-namespace:System;assembly=mscorlib">
+
+    <FontFamily x:Key="BaseFont">Consolas</FontFamily>
+
+    <CorLib:Double x:Key="Mini">8</CorLib:Double>
+    <CorLib:Double x:Key="Small">14</CorLib:Double>
+    <CorLib:Double x:Key="Regular">16</CorLib:Double>
+    <CorLib:Double x:Key="Big">20</CorLib:Double>
+    <CorLib:Double x:Key="H1">23</CorLib:Double>
+
+</ResourceDictionary>
