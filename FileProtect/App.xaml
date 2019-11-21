@@ -4,6 +4,15 @@
              xmlns:local="clr-namespace:FileProtect"
              StartupUri="View\MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles\Colors.xaml"/>
+                <ResourceDictionary Source="Styles\Font.xaml"/>
+
+                <ResourceDictionary Source="Styles\BaseButton.xaml"/>
+                <ResourceDictionary Source="Styles\CheckBoxBase.xaml"/>
+                <ResourceDictionary Source="Styles\TextBoxBase.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

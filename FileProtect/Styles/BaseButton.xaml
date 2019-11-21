@@ -6,8 +6,9 @@
         <Setter Property="Background" Value="{StaticResource BlackBrush}"/>
         <Setter Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
-        <Setter Property="FontSize" Value="{StaticResource BaseFont}"/>
-        
+        <Setter Property="FontSize" Value="{StaticResource Regular}"/>
+        <Setter Property="FontFamily" Value="{StaticResource BaseFont}"/>
+
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">

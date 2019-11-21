@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="BaseCheckBox" TargetType="CheckBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+
+                    <WrapPanel>
+                        <Border BorderBrush="White" BorderThickness="2" Width="50" Height="50">
+                            <Rectangle x:Name="rec" Fill="{TemplateBinding Background}"/>
+                        </Border>
+
+                        <TextBlock Text="{TemplateBinding Content}" FontSize="{StaticResource Regular}" FontFamily="{StaticResource BaseFont}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+
+                    </WrapPanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="rec" Property="Fill" Value="Green"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="rec" Property="Fill" Value="Red"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:FileProtect.Styles">
+
+    <Style x:Name="TexBoxBase" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="{StaticResource BaseFont}"/>
+        <Setter Property="FontSize" Value="{StaticResource Small}"/>
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="Background" Value="{StaticResource BlackBrush}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    
+                    <Border x:Name="brd" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <TextBlock x:Name="hint" 
+                                       Text="{TemplateBinding Tag}" 
+                                       Background="Transparent" 
+                                       Foreground="{StaticResource GrayBrush}" 
+                                       VerticalAlignment="Center" 
+                                       TextAlignment="{TemplateBinding TextAlignment}"
+                                       FontSize="{TemplateBinding FontSize}" 
+                                       IsHitTestVisible="False"
+                                       Visibility="Collapsed"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value=""/>
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="hint" Property="Visibility" Value="Visible"/>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                    
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+</ResourceDictionary>
