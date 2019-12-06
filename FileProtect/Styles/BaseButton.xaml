@@ -8,14 +8,14 @@
         <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
         <Setter Property="FontSize" Value="{StaticResource Regular}"/>
         <Setter Property="FontFamily" Value="{StaticResource BaseFont}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     
-                    <Border x:Name="ButtonBorder"
-                            Background="{TemplateBinding Background}"
-                            CornerRadius="1">
+                    <Border x:Name="ButtonBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </Border>
 

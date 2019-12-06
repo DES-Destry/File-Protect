@@ -7,11 +7,11 @@
                 <ControlTemplate TargetType="CheckBox">
 
                     <WrapPanel>
-                        <Border BorderBrush="White" BorderThickness="2" Width="50" Height="50">
+                        <Border BorderBrush="White" BorderThickness="2" Width="25" Height="25">
                             <Rectangle x:Name="rec" Fill="{TemplateBinding Background}"/>
                         </Border>
 
-                        <TextBlock Text="{TemplateBinding Content}" FontSize="{StaticResource Regular}" FontFamily="{StaticResource BaseFont}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                        <TextBlock Text="{TemplateBinding Content}" FontSize="{StaticResource Regular}" FontFamily="{StaticResource BaseFont}" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"/>
 
                     </WrapPanel>
 

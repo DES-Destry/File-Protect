@@ -4,10 +4,10 @@
 
     <FontFamily x:Key="BaseFont">Consolas</FontFamily>
 
-    <CorLib:Double x:Key="Mini">8</CorLib:Double>
-    <CorLib:Double x:Key="Small">14</CorLib:Double>
-    <CorLib:Double x:Key="Regular">16</CorLib:Double>
-    <CorLib:Double x:Key="Big">20</CorLib:Double>
-    <CorLib:Double x:Key="H1">23</CorLib:Double>
+    <CorLib:Double x:Key="Mini">12</CorLib:Double>
+    <CorLib:Double x:Key="Small">18</CorLib:Double>
+    <CorLib:Double x:Key="Regular">20</CorLib:Double>
+    <CorLib:Double x:Key="Big">24</CorLib:Double>
+    <CorLib:Double x:Key="H1">27</CorLib:Double>
 
 </ResourceDictionary>

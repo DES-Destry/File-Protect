@@ -5,8 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileProtect"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="750" 
+        Width="1000" 
+        Background="Black"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize">
     <Grid>
-        
+        <WrapPanel Height="100" Width="1000" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <Button Style="{StaticResource BaseButton}" Width="200" Height="100" Content="Crypt"/>
+
+            <Button Style="{StaticResource BaseButton}" Width="200" Height="100" Content="Decrypt"/>
+
+            <Button Style="{StaticResource BaseButton}" Width="200" Height="100" Content="Settings"/>
+
+            <TextBlock Text="Main FileProtect page" Height="35" Width="300" Foreground="{StaticResource WhiteBrush}" FontSize="{StaticResource Big}" TextAlignment="Center" HorizontalAlignment="Center"/>
+
+            <Button Style="{StaticResource BaseButton}" Width="100" Height="100" Content="TODO:Cross_Icon"/>
+        </WrapPanel>
     </Grid>
 </Window>
