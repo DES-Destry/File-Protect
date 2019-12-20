@@ -1,0 +1,29 @@
+[33mcommit 8b9c6e162862a6bf8b8f65f172e30d02782358c8[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: DES-Destry <111andreyaa@gmail.com>
+Date:   Fri Dec 20 19:03:04 2019 +0600
+
+    modified:   FileProtect/App.xaml.cs
+
+[33mcommit b4da31b80b4140be0ad7b2d7f1101b5dbce9967a[m
+Author: DES-Destry <111andreyaa@gmail.com>
+Date:   Fri Dec 6 21:44:05 2019 +0600
+
+    Fixed bugs with TextBox style. Application base created
+
+[33mcommit 8dd1a00498c7a066ca115e1e1e66c7433c6ac588[m
+Author: DES-Destry <111andreyaa@gmail.com>
+Date:   Thu Nov 21 21:06:35 2019 +0600
+
+    All styles file created(CheckBoxBase.xaml TextBoxBase.xaml). They are connected in App.xaml file. IT NOT TESTED!
+
+[33mcommit 1e6f7fec518b8d41cab49953ad6fecaeb2877758[m
+Author: DES-Destry <111andreyaa@gmail.com>
+Date:   Tue Nov 19 21:46:49 2019 +0600
+
+    Added 3 style files: Fonts.xaml; Colors.xaml; Buttons.xaml; This is the style standart for my application.
+
+[33mcommit 5ed02ce74626ff1efc09dc82a26b2b9f4fff5f18[m
+Author: DES-Destry <111andreyaa@gmail.com>
+Date:   Sun Nov 17 18:02:26 2019 +0600
+
+    First commit. Project has been created at this moment. I'm only create standart folders for WPF MVVM pattern
