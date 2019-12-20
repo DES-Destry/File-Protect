@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace FileProtect.Model
 {
-    class BaseModelView : INotifyPropertyChanged
+    public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

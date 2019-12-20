@@ -10,6 +10,7 @@
         <Setter Property="FontFamily" Value="{StaticResource BaseFont}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="{StaticResource WhiteBrush}"/>
+        <Setter Property="Cursor" Value="Hand"/>
 
         <Setter Property="Template">
             <Setter.Value>

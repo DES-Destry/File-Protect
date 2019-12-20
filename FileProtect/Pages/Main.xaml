@@ -1,0 +1,28 @@
+﻿<Page x:Class="FileProtect.Pages.Main"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FileProtect.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="620" 
+      d:DesignWidth="1000"
+      Title="Main">
+
+    <Grid>
+        <Image x:Name="MainImage"
+               Width="180"
+               Height="180"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"/>
+
+        <TextBlock Text="Welcome to 'File Protect'!"
+                   Height="75"
+                   Width="800"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   FontSize="{StaticResource H3}"
+                   FontFamily="{StaticResource BaseFont}"
+                   Foreground="{StaticResource WhiteBrush}"/>
+    </Grid>
+</Page>

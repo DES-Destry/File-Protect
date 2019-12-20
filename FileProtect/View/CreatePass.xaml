@@ -1,0 +1,69 @@
+﻿<Window x:Class="FileProtect.View.CreatePass"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileProtect.View"
+        mc:Ignorable="d"
+        Title="CreatePass" 
+        Height="397" 
+        Width="1100"
+        Background="{StaticResource BlackBrush}"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        ShowInTaskbar="False">
+    <StackPanel>
+        <TextBlock Height="60" 
+                   Text="Create password"
+                   TextAlignment="Center"
+                   Foreground="{StaticResource WhiteBrush}"
+                   FontFamily="{StaticResource BaseFont}"
+                   FontSize="{StaticResource H3}"/>
+        
+        <TextBlock Text="When using application, you will have to pereodically enter this password.Think about it well and remember this password. It will be difficult to fix it later!"
+                   TextWrapping="Wrap"
+                   Foreground="{StaticResource WhiteBrush}"
+                   FontFamily="{StaticResource BaseFont}"
+                   FontSize="{StaticResource Regular}"/>
+
+        <TextBlock Height="25"
+                   Margin="0, 20, 0, 0"
+                   Text="New password:"
+                   TextAlignment="Center"
+                   Foreground="{StaticResource  WhiteBrush}"
+                   FontFamily="{StaticResource BaseFont}"
+                   FontSize="{StaticResource Regular}"/>
+
+        <PasswordBox x:Name="NewPassword"
+                     Height="30" 
+                     PasswordChanged="NewPasswordChanged"
+                     FontSize="{StaticResource Regular}"/>
+
+        <TextBlock Height="25"
+                   Margin="0, 10, 0, 0"
+                   Text="Repeat password:"
+                   TextAlignment="Center"
+                   Foreground="{StaticResource  WhiteBrush}"
+                   FontFamily="{StaticResource BaseFont}"
+                   FontSize="{StaticResource Regular}"/>
+
+        <PasswordBox x:Name="RepeatPassword"
+                     Height="30" 
+                     PasswordChanged="RepeatPassworChanged"
+                     FontSize="{StaticResource Regular}"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Margin="0, 50, 0, 0"
+                Content="OK"
+                Height="50" 
+                Click="OK"
+                Command="{Binding CreateCommand}"/>
+        
+        <Button Style="{StaticResource BaseButton}"
+                Content="Cancel"
+                Height="50"
+                Command="{Binding CancelCommand}"/>
+        
+    </StackPanel>
+</Window>

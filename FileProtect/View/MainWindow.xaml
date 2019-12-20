@@ -7,22 +7,46 @@
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="750" 
-        Width="1000" 
-        Background="Black"
+        Width="1100" 
+        Background="{StaticResource BlackBrush}"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="PageSelectSize" BasedOn="{StaticResource BaseButton}" TargetType="Button">
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="Height" Value="100"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <WrapPanel Height="100" Width="1000" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <Button Style="{StaticResource BaseButton}" Width="200" Height="100" Content="Crypt"/>
+        
+        <StackPanel Height="750" 
+                    Width="100" 
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top">
+            
+            <Button Style="{StaticResource PageSelectSize}" 
+                    Content="Crypt"/>
 
-            <Button Style="{StaticResource BaseButton}" Width="200" Height="100" Content="Decrypt"/>
+            <Button Style="{StaticResource PageSelectSize}"
+                    Content="Decrypt"/>
 
-            <Button Style="{StaticResource BaseButton}" Width="200" Height="100" Content="Settings"/>
+            <Button Style="{StaticResource PageSelectSize}"
+                    Content="Settings"
+                    Margin="0,350,0,0"/>
 
-            <TextBlock Text="Main FileProtect page" Height="35" Width="300" Foreground="{StaticResource WhiteBrush}" FontSize="{StaticResource Big}" TextAlignment="Center" HorizontalAlignment="Center"/>
-
-            <Button Style="{StaticResource BaseButton}" Width="100" Height="100" Content="TODO:Cross_Icon"/>
-        </WrapPanel>
+            <Button Style="{StaticResource BaseButton}" 
+                    Width="100" 
+                    Height="100" 
+                    Content="Exit"/>
+        </StackPanel>
+        
+        <Frame Width="1000" 
+               Height="750"
+               HorizontalAlignment="Right"
+               NavigationUIVisibility="Hidden"
+               Opacity="{Binding FrameOpacity}" 
+               Content="{Binding CurrentPage, Mode=TwoWay}"/>
+        
     </Grid>
 </Window>

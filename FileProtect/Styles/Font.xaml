@@ -9,5 +9,6 @@
     <CorLib:Double x:Key="Regular">20</CorLib:Double>
     <CorLib:Double x:Key="Big">24</CorLib:Double>
     <CorLib:Double x:Key="H1">27</CorLib:Double>
+    <CorLib:Double x:Key="H3">54</CorLib:Double>
 
 </ResourceDictionary>

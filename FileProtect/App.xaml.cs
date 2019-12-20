@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Security.Cryptography;
 using System.Windows;
 
 namespace FileProtect
 {
-    /// <summary>
-    /// Логика взаимодействия для App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        public static readonly string MainPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\DES Destry";
+        public static readonly MD5 md5 = MD5.Create();
     }
 }

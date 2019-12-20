@@ -1,20 +1,21 @@
 ﻿using FileProtect.Model;
 using System;
 using System.IO;
-using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
-namespace FileProtect
+namespace FileProtect.Pages
 {
-    public partial class MainWindow : Window
+    public partial class Main : Page
     {
-        public MainWindow()
+        public Main()
         {
             try
             {
-                DataContext = new ViewModel.MainViewModel();
                 InitializeComponent();
+                MainImage.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\images\\WhiteHomePage.png"));
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 using (StreamWriter sw = new StreamWriter($@"{App.MainPath}\File Protect\0.log", true))
                 {
