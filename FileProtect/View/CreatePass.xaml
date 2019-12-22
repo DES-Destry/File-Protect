@@ -13,21 +13,24 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         ShowInTaskbar="False">
-    <StackPanel>
-        <TextBlock Height="60" 
+    <Border Background="Transparent" 
+            BorderBrush="{StaticResource WhiteBrush}" 
+            BorderThickness="1">
+        <StackPanel>
+            <TextBlock Height="60" 
                    Text="Create password"
                    TextAlignment="Center"
                    Foreground="{StaticResource WhiteBrush}"
                    FontFamily="{StaticResource BaseFont}"
                    FontSize="{StaticResource H3}"/>
-        
-        <TextBlock Text="When using application, you will have to pereodically enter this password.Think about it well and remember this password. It will be difficult to fix it later!"
+
+            <TextBlock Text="When using application, you will have to pereodically enter this password.Think about it well and remember this password. It will be difficult to fix it later!"
                    TextWrapping="Wrap"
                    Foreground="{StaticResource WhiteBrush}"
                    FontFamily="{StaticResource BaseFont}"
                    FontSize="{StaticResource Regular}"/>
 
-        <TextBlock Height="25"
+            <TextBlock Height="25"
                    Margin="0, 20, 0, 0"
                    Text="New password:"
                    TextAlignment="Center"
@@ -35,12 +38,12 @@
                    FontFamily="{StaticResource BaseFont}"
                    FontSize="{StaticResource Regular}"/>
 
-        <PasswordBox x:Name="NewPassword"
+            <PasswordBox x:Name="NewPassword"
                      Height="30" 
                      PasswordChanged="NewPasswordChanged"
                      FontSize="{StaticResource Regular}"/>
 
-        <TextBlock Height="25"
+            <TextBlock Height="25"
                    Margin="0, 10, 0, 0"
                    Text="Repeat password:"
                    TextAlignment="Center"
@@ -48,22 +51,23 @@
                    FontFamily="{StaticResource BaseFont}"
                    FontSize="{StaticResource Regular}"/>
 
-        <PasswordBox x:Name="RepeatPassword"
+            <PasswordBox x:Name="RepeatPassword"
                      Height="30" 
                      PasswordChanged="RepeatPassworChanged"
                      FontSize="{StaticResource Regular}"/>
 
-        <Button Style="{StaticResource BaseButton}"
+            <Button Style="{StaticResource BaseButton}"
                 Margin="0, 50, 0, 0"
-                Content="OK"
+                Content="Continue"
                 Height="50" 
                 Click="OK"
                 Command="{Binding CreateCommand}"/>
-        
-        <Button Style="{StaticResource BaseButton}"
+
+            <Button Style="{StaticResource BaseButton}"
                 Content="Cancel"
                 Height="50"
                 Command="{Binding CancelCommand}"/>
-        
-    </StackPanel>
+
+        </StackPanel>
+    </Border>
 </Window>

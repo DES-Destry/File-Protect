@@ -12,41 +12,53 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         ResizeMode="NoResize">
+    
     <Window.Resources>
         <Style x:Key="PageSelectSize" BasedOn="{StaticResource BaseButton}" TargetType="Button">
             <Setter Property="Width" Value="100"/>
             <Setter Property="Height" Value="100"/>
         </Style>
     </Window.Resources>
+    
     <Grid>
-        
-        <StackPanel Height="750" 
-                    Width="100" 
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top">
+        <Border Background="Transparent" 
+                BorderBrush="{StaticResource WhiteBrush}" 
+                BorderThickness="1"
+                Width="100"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top">
             
-            <Button Style="{StaticResource PageSelectSize}" 
-                    Content="Crypt"/>
+            <StackPanel Height="750">
 
-            <Button Style="{StaticResource PageSelectSize}"
-                    Content="Decrypt"/>
+                <Button Style="{StaticResource PageSelectSize}" 
+                        Content="Crypt"/>
 
-            <Button Style="{StaticResource PageSelectSize}"
-                    Content="Settings"
-                    Margin="0,350,0,0"/>
+                <Button Style="{StaticResource PageSelectSize}"
+                        Content="Decrypt"/>
 
-            <Button Style="{StaticResource BaseButton}" 
-                    Width="100" 
-                    Height="100" 
-                    Content="Exit"/>
-        </StackPanel>
-        
-        <Frame Width="1000" 
-               Height="750"
-               HorizontalAlignment="Right"
-               NavigationUIVisibility="Hidden"
-               Opacity="{Binding FrameOpacity}" 
-               Content="{Binding CurrentPage, Mode=TwoWay}"/>
-        
+                <Button Style="{StaticResource PageSelectSize}"
+                        Content="Settings"
+                        Margin="0,350,0,0"/>
+
+                <Button Style="{StaticResource PageSelectSize}" 
+                        Content="Exit"
+                        Command="{Binding ExitCommand}"/>
+            </StackPanel>
+            
+        </Border>
+
+        <Border Background="Transparent" 
+                BorderBrush="{StaticResource WhiteBrush}" 
+                BorderThickness="1"
+                Width="1000" 
+                Height="750"
+                HorizontalAlignment="Right">
+            
+            <Frame NavigationUIVisibility="Hidden"
+                   Opacity="{Binding FrameOpacity}" 
+                   Content="{Binding CurrentPage}"/>
+            
+        </Border>
+
     </Grid>
 </Window>

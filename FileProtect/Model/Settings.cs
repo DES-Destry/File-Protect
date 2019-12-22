@@ -3,7 +3,7 @@
 namespace FileProtect.Model
 {
     [DataContract]
-    class Settings
+    public class Settings
     {
         [DataMember]
         private string RRHBN { get; set; }
@@ -19,8 +19,10 @@ namespace FileProtect.Model
         public bool SaveCache { get; set; }
         [DataMember]
         public bool WarningMessageShow { get; set; }
+        [DataMember]
+        public bool WriteErrorFiles { get; set; }
 
-        public Settings(string aaa, string ver, bool checkUpdates, bool deleteData, bool writeLogs, bool saveCache, bool warning)
+        public Settings(string aaa, string ver, bool checkUpdates, bool deleteData, bool writeLogs, bool saveCache, bool warning, bool errors)
         {
             this.RRHBN = aaa;
             this.Version = ver;
@@ -29,6 +31,7 @@ namespace FileProtect.Model
             this.WriteLogs = writeLogs;
             this.SaveCache = saveCache;
             this.WarningMessageShow = warning;
+            this.WriteErrorFiles = errors;
         }
 
         public string ASSKOP()

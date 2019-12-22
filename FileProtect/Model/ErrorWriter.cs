@@ -8,10 +8,20 @@ namespace FileProtect.Model
     {
         public static void WriteError(Exception exception)
         {
-            using(FileStream sw = new FileStream($@"{App.MainPath}\File Protect\error{DateTime.Now.ToString("MMddyyyyHHmmss")}.err", FileMode.Create))
+            if (App.Settings == null || App.Settings.WriteErrorFiles == true)
             {
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(sw, exception);
+                using (FileStream sw = new FileStream($@"{App.MainPath}\File Protect\{DateTime.Now.ToString("MMddyyyyHHmmss")}-{exception.HResult}.err", FileMode.Create))
+                {
+                    var formatter = new BinaryFormatter();
+                    formatter.Serialize(sw, exception);
+
+                    Logs.WriteLog($"CRITICALERROR-{exception.Message}");
+                    Logs.WriteLog($"\"{App.MainPath}\\File Protect\\{DateTime.Now.ToString("MMddyyyyHHmmss")}-{exception.HResult}.err\" has been created");
+                }
+            }
+            else
+            {
+                return;
             }
         }
     }
