@@ -35,6 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DESTRY.IO.Errors">
+      <HintPath>..\..\DESTRY.IO.Errors\DESTRY.IO.Errors\bin\Debug\DESTRY.IO.Errors.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Core.1.1.2\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -57,8 +69,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\Logs.cs" />
-    <Compile Include="Pages\Crypt.xaml.cs">
-      <DependentUpon>Crypt.xaml</DependentUpon>
+    <Compile Include="Model\Meta.cs" />
+    <Compile Include="Model\MetaManipulator.cs" />
+    <Compile Include="Pages\Encrypt.xaml.cs">
+      <DependentUpon>Encrypt.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Decrypt.xaml.cs">
       <DependentUpon>Decrypt.xaml</DependentUpon>
@@ -66,6 +80,8 @@
     <Compile Include="Pages\Settings.xaml.cs">
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\DecryptViewModel.cs" />
+    <Compile Include="ViewModel\EncryptViewModel.cs" />
     <Compile Include="View\PasswordReq.xaml.cs">
       <DependentUpon>PasswordReq.xaml</DependentUpon>
     </Compile>
@@ -73,7 +89,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Crypt.xaml">
+    <Page Include="Pages\Encrypt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

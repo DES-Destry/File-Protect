@@ -74,7 +74,7 @@ namespace FileProtect.ViewModel
                                 var alkndfw = App.md5.ComputeHash(Encoding.UTF8.GetBytes(newPassword));
                                 string asdffdsairw = Convert.ToBase64String(alkndfw);
 
-                                settings = new Settings(asdffdsairw, "v1.0.0", true, false, true, true, true, true);
+                                settings = new Settings(asdffdsairw, App.Version, true, false, true, true, true, true);
                                 App.UpdateSettings(settings);
                                 SettingsManipulator.Write($@"{App.MainPath}\File Protect\appsettings.json", settings);
 

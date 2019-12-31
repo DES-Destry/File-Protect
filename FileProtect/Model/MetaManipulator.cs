@@ -3,21 +3,21 @@ using System.Runtime.Serialization.Json;
 
 namespace FileProtect.Model
 {
-    class SettingsManipulator
+    class MetaManipulator
     {
-        public static Settings Read(string path)
+        public static Meta Read(string path)
         {
-            var jsonSerializer = new DataContractJsonSerializer(typeof(Settings));
+            var jsonSerializer = new DataContractJsonSerializer(typeof(Meta));
             using (FileStream fs = new FileStream(path, FileMode.Open))
             {
-                Settings settings = jsonSerializer.ReadObject(fs) as Settings;
+                Meta settings = jsonSerializer.ReadObject(fs) as Meta;
                 return settings;
             }
         }
 
-        public static void Write(string path, Settings dataObject)
+        public static void Write(string path, Meta dataObject)
         {
-            var jsonSerializer = new DataContractJsonSerializer(typeof(Settings));
+            var jsonSerializer = new DataContractJsonSerializer(typeof(Meta));
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
                 jsonSerializer.WriteObject(fs, dataObject);

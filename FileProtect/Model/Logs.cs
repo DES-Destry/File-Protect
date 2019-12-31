@@ -13,8 +13,8 @@ namespace FileProtect.Model
                 {
                     using (StreamWriter sw = new StreamWriter($@"{App.MainPath}\File Protect\.log", true))
                     {
-                        sw.WriteLine(" ");
                         sw.WriteLine($@"{DateTime.Now.ToString("MM-dd-yyyy HH:mm:ss")} -- {message}");
+                        sw.WriteLine(" ");
                     }
                 }
                 else

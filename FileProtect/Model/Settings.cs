@@ -3,7 +3,7 @@
 namespace FileProtect.Model
 {
     [DataContract]
-    public class Settings
+    public class Settings 
     {
         [DataMember]
         private string RRHBN { get; set; }

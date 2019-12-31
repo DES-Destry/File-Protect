@@ -17,10 +17,10 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="rec" Property="Fill" Value="Green"/>
+                            <Setter TargetName="rec" Property="Fill" Value="White"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter TargetName="rec" Property="Fill" Value="Red"/>
+                            <Setter TargetName="rec" Property="Fill" Value="Black"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
 

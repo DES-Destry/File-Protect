@@ -3,15 +3,15 @@ using System.Windows.Controls;
 
 namespace FileProtect.Pages
 {
-    public partial class Decrypt : Page
+    public partial class Crypt : Page
     {
-        public Decrypt()
+        public Crypt()
         {
             InitializeComponent();
-            DataContext = new DecryptViewModel();
+            DataContext = new EncryptViewModel();
         }
 
-        private void ChangedGGDAFR(object sender, System.Windows.RoutedEventArgs e)
+        private void ChangedDATTAH(object sender, System.Windows.RoutedEventArgs e)
         {
             if (sender is PasswordBox pass && DataContext is EncryptViewModel context)
             {

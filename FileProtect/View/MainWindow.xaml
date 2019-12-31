@@ -31,13 +31,16 @@
             <StackPanel Height="750">
 
                 <Button Style="{StaticResource PageSelectSize}" 
-                        Content="Crypt"/>
+                        Content="Encrypt"
+                        Command="{Binding CryptOpenCommand}"/>
 
                 <Button Style="{StaticResource PageSelectSize}"
-                        Content="Decrypt"/>
+                        Content="Decrypt"
+                        Command="{Binding DecryptOpenCommand}"/>
 
                 <Button Style="{StaticResource PageSelectSize}"
                         Content="Settings"
+                        Command="{Binding SettingsOpenCommand}"
                         Margin="0,350,0,0"/>
 
                 <Button Style="{StaticResource PageSelectSize}" 
@@ -55,7 +58,7 @@
                 HorizontalAlignment="Right">
             
             <Frame NavigationUIVisibility="Hidden"
-                   Opacity="{Binding FrameOpacity}" 
+                   Opacity="{Binding FrameOpacity, Mode=TwoWay}" 
                    Content="{Binding CurrentPage}"/>
             
         </Border>

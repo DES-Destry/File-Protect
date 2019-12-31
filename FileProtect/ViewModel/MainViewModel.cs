@@ -1,6 +1,9 @@
 ﻿using FileProtect.Model;
+using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -51,21 +54,21 @@ namespace FileProtect.ViewModel
                 return cryptOpenCommand ??
                     (cryptOpenCommand = new RelayCommand(obj =>
                     {
-
+                        ChangePage(cryptPage);
                     }));
             }
         }
 
 
         private RelayCommand decryptOpenCommand;
-        public RelayCommand DeryptOpenCommand
+        public RelayCommand DecryptOpenCommand
         {
             get
             {
                 return decryptOpenCommand ??
                     (decryptOpenCommand = new RelayCommand(obj =>
                     {
-
+                        ChangePage(decryptPage);
                     }));
             }
         }
@@ -79,7 +82,7 @@ namespace FileProtect.ViewModel
                 return settingsOpenCommand ??
                     (settingsOpenCommand = new RelayCommand(obj =>
                     {
-
+                        ChangePage(settingsPage);
                     }));
             }
         }
@@ -102,6 +105,24 @@ namespace FileProtect.ViewModel
 
         public MainViewModel()
         {
+            try
+            {
+                using (var key = Registry.ClassesRoot)
+                {
+                    key.OpenSubKey(".meta");
+                    key.SetValue(null, "Folder encoding metadata.");
+                }
+            }
+            catch(Exception ex) { }
+            try
+            {
+                using (var key = Registry.ClassesRoot)
+                {
+                    key.OpenSubKey(".err");
+                    key.SetValue(null, "App *ERROR* file");
+                }
+            }
+            catch(Exception ex) { }
             try
             {
                 if (!Directory.Exists($"{App.MainPath}"))
@@ -169,6 +190,29 @@ namespace FileProtect.ViewModel
 
             Logs.WriteLog("Creating password window has been opened!");
             createPass.ShowDialog();
+        }
+
+        private async Task ChangePage(Page page)
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                for (double opacity = 1.0; opacity > 0.0; opacity -= 0.1)
+                {
+                    FrameOpacity = opacity;
+                    Thread.Sleep(50);
+                }
+                Logs.WriteLog("Page off animation has been worked");
+
+                CurrentPage = page;
+                Logs.WriteLog("Page has been changed");
+
+                for (double opacity = 0.0; opacity < 1.1; opacity += 0.1)
+                {
+                    FrameOpacity = opacity;
+                    Thread.Sleep(50);
+                }
+                Logs.WriteLog("Page on animation has been worked");
+            });
         }
     }
 }

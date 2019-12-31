@@ -1,17 +1,17 @@
-﻿<Page x:Class="FileProtect.Pages.Decrypt"
+﻿<Page x:Class="FileProtect.Pages.Crypt"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileProtect.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="750" 
+      d:DesignHeight="750"
       d:DesignWidth="1000"
-      Title="Decrypt">
+      Title="Crypt">
 
     <Page.Resources>
 
-        <Style x:Key="ButtonStandart1" BasedOn="{StaticResource BaseButton}" TargetType="Button">
+        <Style x:Key="ButtonStandart" BasedOn="{StaticResource BaseButton}" TargetType="Button">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Width" Value="50"/>
             <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -27,29 +27,29 @@
                Width="180"
                Height="180"
                HorizontalAlignment="Left"
-               VerticalAlignment="Top"
+               VerticalAlignment="Top" 
                Margin="0,13,0,0"/>
 
-        <TextBlock Text="Decrypt"
+        <TextBlock Text="Encrypt"
                    Height="75"
                    Width="800"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
                    FontSize="{StaticResource H3}"
                    FontFamily="{StaticResource BaseFont}"
-                   Foreground="{StaticResource WhiteBrush}"
+                   Foreground="{StaticResource WhiteBrush}" 
                    Margin="0,13,0,0"/>
 
         <TextBox x:Name="xPath"
                  Style="{StaticResource TextBoxBase}"
                  Text="{Binding XPath, Mode=TwoWay}"
-                 Tag="Path to your file what you want to dencrypt here..."
+                 Tag="Path to your folder what you want to encrypt here..."
                  Height="50" 
                  HorizontalAlignment="Left" 
                  Width="925" 
                  Margin="10,200,0,513"/>
 
-        <Button Style="{StaticResource ButtonStandart1}"
+        <Button Style="{StaticResource ButtonStandart}"
                 Command="{Binding XPathChangeCommand}"
                 Content="..." 
                 Margin="0,200,10,513"/>
@@ -63,46 +63,56 @@
                  Width="870" 
                  Margin="10,260,0,453"/>
 
-        <Button Style="{StaticResource ButtonStandart1}"
+        <TextBox x:Name="Extencion"
+                 Style="{StaticResource TextBoxBase}"
+                 Text="{Binding Extencion, Mode=TwoWay}"
+                 Tag="Your result file extencion here... (For example: txt, mp4, ...)"
+                 Height="50" 
+                 HorizontalAlignment="Left" 
+                 Width="980" 
+                 Margin="10,320,0,393"/>
+
+        <Button Style="{StaticResource ButtonStandart}"
                 Command="{Binding YPathChangeCommand}"
                 Content="..." 
                 Margin="0,260,10,453"/>
 
-        <Button Style="{StaticResource ButtonStandart1}"
+        <Button Style="{StaticResource ButtonStandart}"
                 Command="{Binding CopyCommand}"
                 Content="Copy" 
                 Margin="0,260,65,453"/>
 
         <PasswordBox Height="50" 
-                     Margin="10,353,10,360"
-                     FontSize="{StaticResource H1}" PasswordChanged="ChangedGGDAFR"/>
+                     Margin="10,426,10,287"
+                     FontSize="{StaticResource H1}" 
+                     PasswordChanged="ChangedDATTAH"/>
 
         <Label Content="Enter password to unlock this funcionality:"
                Foreground="{StaticResource WhiteBrush}"
                FontSize="{StaticResource Big}"
                FontFamily="{StaticResource BaseFont}"
-               Margin="5,316,1,401" />
+               Margin="5,389,1,328" />
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding OldDataDel, Mode=TwoWay}"
-                  Content="Delete old data before decrypt"
+                  Content="Delete old data before encrypt"
                   HorizontalAlignment="Left"
                   Height="30" 
-                  Margin="10,411,0,322"/>
+                  Margin="10,484,0,249"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding WriteLogs, Mode=TwoWay}"
                   Content="Write logs"
                   HorizontalAlignment="Left"
                   Height="30" 
-                  Margin="10,447,0,286"/>
+                  Margin="10,520,0,213"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding OperationWrite, Mode=TwoWay}"
-                  Content="Write decrypt information at main page"
+                  Content="Write encrypt information at main page"
                   HorizontalAlignment="Left"
                   Height="30" 
-                  Margin="10,481,0,252"/>
+                  Margin="10,554,0,179"/>
 
         <TextBlock Text="{Binding TextProgress}"
                    Foreground="{StaticResource WhiteBrush}"
@@ -119,10 +129,12 @@
                      Maximum="10"/>
 
         <Button Style="{StaticResource BaseButton}"
-                Command="{Binding DecryptCommand}"
-                Content="Start decrypt"
+                Command="{Binding EncryptCommand}"
+                Content="Start encrypt"
                 Height="60"
                 VerticalAlignment="Bottom" 
                 Margin="10,0,10,10"/>
+
     </Grid>
+
 </Page>

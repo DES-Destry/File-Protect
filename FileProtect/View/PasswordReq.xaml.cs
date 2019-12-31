@@ -17,11 +17,14 @@ namespace FileProtect.View
             {
                 InitializeComponent();
 
-                settings = SettingsManipulator.Read($@"{App.MainPath}\File Protect\appsettings.json");
-                App.UpdateSettings(settings);
+                if(SettingsManipulator.Read($@"{App.MainPath}\File Protect\appsettings.json") is Settings json)
+                {
+                    settings = json;
+                    App.UpdateSettings(settings);
 
-                Logs.WriteLog($"\"{App.MainPath}\\File Protect\\appsettings.json\" has been readed");
-                Logs.WriteLog("Global application's settings has been updated");
+                    Logs.WriteLog($"\"{App.MainPath}\\File Protect\\appsettings.json\" has been readed");
+                    Logs.WriteLog("Global application's settings has been updated");
+                }
             }
             catch(Exception ex)
             {
