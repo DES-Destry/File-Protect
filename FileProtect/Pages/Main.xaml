@@ -24,5 +24,14 @@
                    FontSize="{StaticResource H3}"
                    FontFamily="{StaticResource BaseFont}"
                    Foreground="{StaticResource WhiteBrush}"/>
+
+        <TextBlock Text="early v1.0.0"
+                   Height="24"
+                   Width="124"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   FontSize="{StaticResource Small}"
+                   FontFamily="{StaticResource BaseFont}"
+                   Foreground="{StaticResource WhiteBrush}"/>
     </Grid>
 </Page>

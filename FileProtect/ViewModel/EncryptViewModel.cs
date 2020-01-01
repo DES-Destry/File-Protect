@@ -396,94 +396,99 @@ namespace FileProtect.ViewModel
             {
                 await Task.Factory.StartNew(() =>
                 {
-                    ZipFile zip = new ZipFile();
-                    zip.AddDirectory(path);
-                    zip.Save($"{path}.zip");
-
-                    File.SetAttributes($"{path}.zip", FileAttributes.Hidden);
-
-                    if (writeLogs)
-                        Logs.WriteLog("Cache of encrypt procces has been created");
-
-                    Progress = 3;
-                    TextProgress = "3/10 part - rate cache size(fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("3/10 part - rate cache size");
-
-                    FileInfo info = new FileInfo($"{ path }.zip");
-                    long size = info.Length;
-
-                    if (size > 2000000000)
+                    try
                     {
-                        if (writeLogs)
-                            Logs.WriteLog("ERROR-Folder should not be more than 2 GB!");
+                        ZipFile zip = new ZipFile();
+                        zip.AddDirectory(path);
+                        zip.Save($"{path}.zip");
 
-                        Progress = 0;
-                        TextProgress = "Encoding error... Try again with smaller file(not be more 2 GB).";
+                        File.SetAttributes($"{path}.zip", FileAttributes.Hidden);
+
+                        if (writeLogs)
+                            Logs.WriteLog("Cache of encrypt procces has been created");
+
+                        Progress = 3;
+                        TextProgress = "3/10 part - rate cache size(fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("3/10 part - rate cache size");
+
+                        FileInfo info = new FileInfo($"{ path }.zip");
+                        long size = info.Length;
+
+                        if (size > 2000000000)
+                        {
+                            if (writeLogs)
+                                Logs.WriteLog("ERROR-Folder should not be more than 2 GB!");
+
+                            Progress = 0;
+                            TextProgress = "Encoding error... Try again with smaller file(not be more 2 GB).";
+                            File.Delete($"{path}.zip");
+                            return;
+                        }
+
+                        Progress = 4;
+                        TextProgress = "4/10 part - reading...(fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("4/10 part - reading...");
+
+                        byte[] data = File.ReadAllBytes($"{path}.zip");
+
+                        Progress = 5;
+                        TextProgress = "5/10 part - encoding...(not fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("5/10 part - encoding...");
+
+                        string zipData = Encoding.Default.GetString(data);
+
+                        Progress = 6;
+                        TextProgress = "6/10 part - encoding...(not fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("6/10 part - encoding...");
+
+                        string newData = new string(zipData.ToCharArray().Reverse().ToArray());
+
+                        Progress = 7;
+                        TextProgress = "7/10 part - writing...(slow)";
+                        if (writeLogs)
+                            Logs.WriteLog("7/10 part - writing...");
+
+                        File.Create($"{path}.{extencion}").Close();
+                        File.WriteAllText($"{path}.{extencion}", newData);
+
+                        Progress = 8;
+                        TextProgress = "8/10 part - deleting cache(fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("8/10 part - deleting cache");
+
                         File.Delete($"{path}.zip");
-                        return;
-                    }
 
-                    Progress = 4;
-                    TextProgress = "4/10 part - reading...(fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("4/10 part - reading...");
-
-                    //ex
-                    byte[] data = File.ReadAllBytes($"{path}.zip");
-
-                    Progress = 5;
-                    TextProgress = "5/10 part - encoding...(not fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("5/10 part - encoding...");
-
-                    string zipData = Encoding.ASCII.GetString(data);
-
-                    Progress = 6;
-                    TextProgress = "6/10 part - encoding...(fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("6/10 part - encoding...");
-
-                    string newData = new string(zipData.ToCharArray().Reverse().ToArray());
-
-                    Progress = 7;
-                    TextProgress = "7/10 part - writing...(very fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("7/10 part - writing...");
-
-                    File.Create($"{path}.{extencion}").Close();
-                    using (var stream = new StreamWriter($"{path}.{extencion}"))
-                    {
-                        stream.Write(newData);
-                    }
-
-                    Progress = 8;
-                    TextProgress = "8/10 part - deleting cache(fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("8/10 part - deleting cache");
-
-                    File.Delete($"{path}.zip");
-
-                    if (writeLogs)
-                        Logs.WriteLog("Cache of encrypt procces has been deleted!");
-
-                    Progress = 9;
-                    TextProgress = "9/10 part - deleting old file if you want(fast)";
-                    if (writeLogs)
-                        Logs.WriteLog("9/10 part - deleting old file if you want");
-
-                    if (oldDataDel == true)
-                    {
-                        Directory.Delete(xPath);
                         if (writeLogs)
-                            Logs.WriteLog("Old directory has been deleted!");
+                            Logs.WriteLog("Cache of encrypt procces has been deleted!");
+
+                        Progress = 9;
+                        TextProgress = "9/10 part - deleting old file if you want(fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("9/10 part - deleting old file if you want");
+
+                        if (oldDataDel)
+                        {
+                            Directory.Delete(xPath);
+                            if (writeLogs)
+                                Logs.WriteLog("Old directory has been deleted!");
+                        }
+
+                        zip.Dispose();
+
+                        Progress = 10;
+                        TextProgress = "10/10 part - encoding complete!";
+
+                        if (writeLogs)
+                            Logs.WriteLog("Encoding complete!");
                     }
-
-                    Progress = 10;
-                    TextProgress = "10/10 part - encoding complete!";
-
-                    if (writeLogs)
-                        Logs.WriteLog("Encoding complete!");
+                    catch(Exception ex)
+                    {
+                        ErrorWriter.WriteError(ex);
+                    }
                 });
             }
             catch (Exception ex)

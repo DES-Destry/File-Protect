@@ -1,6 +1,13 @@
-﻿using FileProtect.Model;
+﻿using FileProtect.Messages;
+using FileProtect.Model;
+using Ionic.Zip;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.IO;
+using System.Linq;
+using System.Media;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FileProtect.ViewModel
 {
@@ -239,7 +246,48 @@ namespace FileProtect.ViewModel
         {
             get
             {
-                return decryptCommand;
+                return decryptCommand ??
+                    (decryptCommand = new RelayCommand(o =>
+                    {
+                        if (!string.IsNullOrEmpty(xPath) && !string.IsNullOrEmpty(yPath))
+                        {
+                            if (!string.IsNullOrEmpty(kwfhdks))
+                            {
+                                var aastre = App.md5.ComputeHash(Encoding.UTF8.GetBytes(kwfhdks));
+                                string ttart = Convert.ToBase64String(aastre);
+
+
+                                if (settings.ASSKOP() != ttart)
+                                {
+                                    SystemSounds.Exclamation.Play();
+                                    InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
+                                    if (writeLogs)
+                                        Logs.WriteLog("WARNING-Entered password incorrect!");
+                                    return;
+                                }
+                                else
+                                {
+                                    DecryptAsync();
+                                }
+                            }
+                            else
+                            {
+                                SystemSounds.Exclamation.Play();
+                                InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
+                                if (writeLogs)
+                                    Logs.WriteLog("WARNING-Entered password incorrect!");
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            SystemSounds.Exclamation.Play();
+                            InfoMessage.ShowInfo("WARNING", "All fields must be filled!");
+                            if (writeLogs)
+                                Logs.WriteLog("WARNING-All fields must be filled!");
+                            return;
+                        }
+                    }));
             }
         }
 
@@ -263,6 +311,106 @@ namespace FileProtect.ViewModel
             {
                 ErrorWriter.WriteError(ex);
             }
+        }
+
+        private async Task DecryptAsync()
+        {
+            await Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    if (writeLogs)
+                        Logs.WriteLog("Decrypting has been started!");
+
+                    string output = $@"{yPath}\{Path.GetFileNameWithoutExtension(xPath)}";
+
+                    Progress = 1;
+                    TextProgress = "1/7 part - data reading...(slow)";
+                    if (writeLogs)
+                        Logs.WriteLog("1/7 part - data reading...");
+
+                    string data = File.ReadAllText(xPath);
+
+                    Progress = 2;
+                    TextProgress = "2/7 part - decrypting...(slow)";
+                    if (writeLogs)
+                        Logs.WriteLog("2/7 part - decrypting...");
+
+                    string newData = new string(data.ToCharArray().Reverse().ToArray());
+                    byte[] bytes = Encoding.Default.GetBytes(newData);
+
+                    Progress = 3;
+                    TextProgress = "3/7 part - cache creating...(slow)";
+                    if (writeLogs)
+                        Logs.WriteLog("3/7 part - cache creating...");
+
+                    File.WriteAllBytes($"{output}.zip", bytes);
+                    File.SetAttributes($"{output}.zip", FileAttributes.Hidden);
+
+                    try
+                    {
+                        using (ZipFile zip = ZipFile.Read($"{output}.zip"))
+                        {
+                            Directory.CreateDirectory(output);
+
+                            Progress = 4;
+                            TextProgress = "4/7 part - decrypting...(not fast)";
+                            if (writeLogs)
+                                Logs.WriteLog("4/7 part - decrypting...");
+
+                            foreach (ZipEntry e in zip)
+                            {
+                                e.Extract(output, ExtractExistingFileAction.OverwriteSilently);
+                            }
+                        }
+
+                        Progress = 5;
+                        TextProgress = "5/7 part - cache deleting...(very fast)";
+                        if (writeLogs)
+                            Logs.WriteLog("5/7 part - cache deleting...");
+
+                        File.Delete($"{output}.zip");
+                    }
+                    catch (Exception ex)
+                    {
+                        SystemSounds.Hand.Play();
+
+                        Progress = 0;
+                        TextProgress = "ERROR-Decrypt uncknown file format!";
+
+                        if (writeLogs)
+                            Logs.WriteLog("ERROR-Decrypt uncknown file format!");
+
+                        ErrorWriter.WriteError(ex);
+
+                        File.Delete($"{output}.zip");
+                        return;
+                    }
+
+                    Progress = 6;
+                    TextProgress = "6/7 part - deleting old files if you need...(very fast)";
+                    if (writeLogs)
+                        Logs.WriteLog("6/7 part - deleting old files if you need...");
+                    if (oldDataDel)
+                    {
+                        File.Delete(xPath);
+                        if (writeLogs)
+                            Logs.WriteLog("Old directory has been deleted!");
+                    }
+
+                    Progress = 7;
+                    TextProgress = "7/7 part - decrypting complete!";
+                    if (writeLogs)
+                        Logs.WriteLog("7/7 part - decrypting complete!");
+
+                    if (writeLogs)
+                        Logs.WriteLog("Decoding complete!");
+                }
+                catch (Exception ex)
+                {
+                    ErrorWriter.WriteError(ex);
+                }
+            });
         }
     }
 }

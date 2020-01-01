@@ -13,7 +13,7 @@ namespace FileProtect.Pages
 
         private void ChangedGGDAFR(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (sender is PasswordBox pass && DataContext is EncryptViewModel context)
+            if (sender is PasswordBox pass && DataContext is DecryptViewModel context)
             {
                 context.KWFHDKS = pass.Password;
             }

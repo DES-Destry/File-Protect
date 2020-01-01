@@ -57,7 +57,7 @@
         <TextBox x:Name="yPath"
                  Style="{StaticResource TextBoxBase}"
                  Text="{Binding YPath, Mode=TwoWay}"
-                 Tag="Path to your result file here..."
+                 Tag="Path to your result folder here..."
                  Height="50" 
                  HorizontalAlignment="Left" 
                  Width="870" 
@@ -75,7 +75,8 @@
 
         <PasswordBox Height="50" 
                      Margin="10,353,10,360"
-                     FontSize="{StaticResource H1}" PasswordChanged="ChangedGGDAFR"/>
+                     FontSize="{StaticResource H1}" 
+                     PasswordChanged="ChangedGGDAFR"/>
 
         <Label Content="Enter password to unlock this funcionality:"
                Foreground="{StaticResource WhiteBrush}"
@@ -116,7 +117,7 @@
                      Background="{StaticResource BlackBrush}"
                      Height="15"
                      Margin="10,673,10,75"
-                     Maximum="10"/>
+                     Maximum="7"/>
 
         <Button Style="{StaticResource BaseButton}"
                 Command="{Binding DecryptCommand}"
