@@ -1,0 +1,46 @@
+﻿<Window x:Class="FileProtect.Messages.WarningMessage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileProtect.Messages"
+        mc:Ignorable="d"
+        Title="WarningMessage" 
+        Height="234" 
+        Width="1100"
+        Background="Black"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
+    <Border Background="Transparent" 
+            BorderBrush="{StaticResource WhiteBrush}"
+            BorderThickness="1">
+        <StackPanel>
+            <TextBlock Height="60" 
+                       Text="TITLE"
+                       x:Name="TitleText"
+                       TextAlignment="Center"
+                       Foreground="{StaticResource WhiteBrush}"
+                       FontFamily="{StaticResource BaseFont}"
+                       FontSize="{StaticResource H3}"/>
+
+            <TextBlock Text="Some message..."
+                       x:Name="MessageText"
+                       TextWrapping="Wrap"
+                       Foreground="{StaticResource WhiteBrush}"
+                       FontFamily="{StaticResource BaseFont}"
+                       FontSize="{StaticResource Regular}"/>
+
+            <Button Style="{StaticResource BaseButton}"
+                    Margin="0,50,0,0"
+                    Content="Continue"
+                    Height="50" 
+                    Click="Continue"/>
+
+            <Button Style="{StaticResource BaseButton}"
+                    Content="Cancel"
+                    Height="50" 
+                    Click="Cancel"/>
+        </StackPanel>
+    </Border>
+</Window>

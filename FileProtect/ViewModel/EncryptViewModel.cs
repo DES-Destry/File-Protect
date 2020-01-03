@@ -3,6 +3,7 @@ using FileProtect.Model;
 using Ionic.Zip;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -151,6 +152,21 @@ namespace FileProtect.ViewModel
         }
 
 
+        private bool buttonEnabled = true;
+        public bool ButtonEnabled
+        {
+            get
+            {
+                return buttonEnabled;
+            }
+            set
+            {
+                buttonEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private RelayCommand xPathChangeCommand;
         public RelayCommand XPathChangeCommand
         {
@@ -237,86 +253,98 @@ namespace FileProtect.ViewModel
                     {
                         try
                         {
-                            if (!string.IsNullOrEmpty(kwfhdks))
+                            if (WarningMessage.ShowWarning("Are you sure?", "This file will be encrypted with your preferences") == WarningResultType.Continue)
                             {
-                                var aastre = App.md5.ComputeHash(Encoding.UTF8.GetBytes(kwfhdks));
-                                string ttart = Convert.ToBase64String(aastre);
-
-
-                                if (settings.ASSKOP() != ttart)
+                                if (!string.IsNullOrEmpty(kwfhdks))
                                 {
+                                    ButtonEnabled = false;
+                                    var aastre = App.md5.ComputeHash(Encoding.UTF8.GetBytes(kwfhdks));
+                                    string ttart = Convert.ToBase64String(aastre);
+
+
+                                    if (App.Settings.ASSKOP() != ttart)
+                                    {
+                                        ButtonEnabled = true;
+                                        SystemSounds.Exclamation.Play();
+                                        InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
+                                        if (writeLogs)
+                                            Logs.WriteLog("WARNING-Entered password incorrect!");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        if (!string.IsNullOrEmpty(xPath) && !string.IsNullOrEmpty(yPath) && !string.IsNullOrEmpty(extencion))
+                                        {
+                                            if (writeLogs)
+                                                Logs.WriteLog("Encoding starting!");
+
+                                            string fileName = new DirectoryInfo(xPath).Name;
+                                            string path = $@"{yPath}\{fileName}";
+
+                                            Directory.CreateDirectory(path);
+
+                                            Progress = 1;
+                                            TextProgress = "1/10 part - creating meta(very fast)";
+                                            if (writeLogs)
+                                                Logs.WriteLog("1/10 part - creating meta");
+
+                                            if (!File.Exists($@"{xPath}\.meta"))
+                                            {
+                                                this.meta = new Meta($"{extencion}", yPath, App.Version);
+                                                MetaManipulator.Write($@"{xPath}\.meta", this.meta);
+
+                                                File.SetAttributes($@"{xPath}\.meta", FileAttributes.Hidden);
+
+                                                if (writeLogs == true)
+                                                {
+                                                    if (writeLogs)
+                                                        Logs.WriteLog("New meta file has been writed");
+                                                }
+                                            }
+
+                                            Progress = 2;
+                                            TextProgress = "2/10 part - creating cache(slow)";
+                                            if (writeLogs)
+                                                Logs.WriteLog("2/10 part - creating cache");
+
+                                            if (string.IsNullOrEmpty(extencion))
+                                            {
+                                                ButtonEnabled = true;
+                                                SystemSounds.Hand.Play();
+                                                InfoMessage.ShowInfo("ERROR", "Extencion field must not be empty!");
+
+                                                if (writeLogs)
+                                                    Logs.WriteLog("ERROR-The extencion field was empty when creating the metadata file containing the file extencion.");
+                                                return;
+                                            }
+
+                                            EncryptAsync(path);
+                                        }
+                                        else
+                                        {
+                                            ButtonEnabled = true;
+                                            SystemSounds.Exclamation.Play();
+                                            InfoMessage.ShowInfo("WARNING!", "Fill all fields!");
+
+                                            if (writeLogs)
+                                                Logs.WriteLog("WARNING-Encrypt page fields not filled!");
+                                            return;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    ButtonEnabled = true;
                                     SystemSounds.Exclamation.Play();
                                     InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
+
                                     if (writeLogs)
                                         Logs.WriteLog("WARNING-Entered password incorrect!");
                                     return;
                                 }
-                                else
-                                {
-                                    if (!string.IsNullOrEmpty(xPath) && !string.IsNullOrEmpty(yPath) && !string.IsNullOrEmpty(extencion))
-                                    {
-                                        if (writeLogs)
-                                            Logs.WriteLog("Encoding starting!");
-
-                                        string fileName = new DirectoryInfo(xPath).Name;
-                                        string path = $@"{yPath}\{fileName}";
-
-                                        Directory.CreateDirectory(path);
-
-                                        Progress = 1;
-                                        TextProgress = "1/10 part - creating meta(very fast)";
-                                        if (writeLogs)
-                                            Logs.WriteLog("1/10 part - creating meta");
-
-                                        if (!File.Exists($@"{xPath}\.meta"))
-                                        {
-                                            this.meta = new Meta($"{extencion}", yPath, App.Version);
-                                            MetaManipulator.Write($@"{xPath}\.meta", this.meta);
-
-                                            File.SetAttributes($@"{xPath}\.meta", FileAttributes.Hidden);
-
-                                            if (writeLogs == true)
-                                            {
-                                                if (writeLogs)
-                                                    Logs.WriteLog("New meta file has been writed");
-                                            }
-                                        }
-
-                                        Progress = 2;
-                                        TextProgress = "2/10 part - creating cache(slow)";
-                                        if (writeLogs)
-                                            Logs.WriteLog("2/10 part - creating cache");
-
-                                        if (string.IsNullOrEmpty(extencion))
-                                        {
-                                            SystemSounds.Hand.Play();
-                                            InfoMessage.ShowInfo("ERROR", "Extencion field must not be empty!");
-
-                                            if (writeLogs)
-                                                Logs.WriteLog("ERROR-The extencion field was empty when creating the metadata file containing the file extencion.");
-                                            return;
-                                        }
-
-                                        EncryptAsync(path);
-                                    }
-                                    else
-                                    {
-                                        SystemSounds.Exclamation.Play();
-                                        InfoMessage.ShowInfo("WARNING!", "Fill all fields!");
-
-                                        if (writeLogs)
-                                            Logs.WriteLog("WARNING-Encrypt page fields not filled!");
-                                        return;
-                                    }
-                                }
                             }
                             else
                             {
-                                SystemSounds.Exclamation.Play();
-                                InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
-
-                                if (writeLogs)
-                                    Logs.WriteLog("WARNING-Entered password incorrect!");
                                 return;
                             }
                         }
@@ -417,6 +445,7 @@ namespace FileProtect.ViewModel
 
                         if (size > 2000000000)
                         {
+                            ButtonEnabled = true;
                             if (writeLogs)
                                 Logs.WriteLog("ERROR-Folder should not be more than 2 GB!");
 
@@ -479,20 +508,53 @@ namespace FileProtect.ViewModel
 
                         zip.Dispose();
 
+
+                        if (operationWrite)
+                        {
+                            string guid = Guid.NewGuid().ToString();
+                            List<Operation> list;
+                            if (File.Exists($@"{App.MainPath}\File Protect\appcache.json"))
+                            {
+                                list = OperationManipulator.Read($@"{App.MainPath}\File Protect\appcache.json");
+                                Logs.WriteLog($"\"{App.MainPath}\\File Protect\\appcache.json\" has been readed!");
+                            }
+                            else
+                            {
+                                list = new List<Operation>();
+                            }
+                            Operation operation = new Operation(guid, OperationType.Encrypt, DateTime.Now, xPath, $"{path}.{extencion}");
+                            list.Add(operation);
+
+                            OperationManipulator.Write($@"{App.MainPath}\File Protect\appcache.json", list);
+                            Logs.WriteLog($"\"{App.MainPath}\\File Protect\\appcache.json\" has been writed!");
+                        }
+
                         Progress = 10;
                         TextProgress = "10/10 part - encoding complete!";
+                        ButtonEnabled = true;
 
                         if (writeLogs)
                             Logs.WriteLog("Encoding complete!");
                     }
-                    catch(Exception ex)
+                    catch (FileNotFoundException)
                     {
+                        ButtonEnabled = true;
+
+                        Progress = 0;
+                        TextProgress = "This file don't exist!";
+                    }
+                    catch (Exception ex)
+                    {
+                        Progress = 0;
+                        TextProgress = "Unknown error. Send files to email in settings page to help fix bugs! thx";
+                        ButtonEnabled = true;
                         ErrorWriter.WriteError(ex);
                     }
                 });
             }
             catch (Exception ex)
             {
+                ButtonEnabled = true;
                 ErrorWriter.WriteError(ex);
             }
         }

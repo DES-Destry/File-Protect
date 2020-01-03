@@ -33,6 +33,10 @@
                             <Setter Property="Background" Value="{StaticResource BlackBrush}"/>
                             <Setter Property="Foreground" Value="{StaticResource WhiteBrush}"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" Value="{StaticResource GrayBrush}"/>
+                            <Setter Property="Foreground" Value="{StaticResource BlackBrush}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                     
                 </ControlTemplate>

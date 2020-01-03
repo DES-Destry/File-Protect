@@ -3,6 +3,7 @@ using FileProtect.Model;
 using Ionic.Zip;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Media;
@@ -135,6 +136,21 @@ namespace FileProtect.ViewModel
         }
 
 
+        private bool buttonEnabled = true;
+        public bool ButtonEnabled
+        {
+            get
+            {
+                return buttonEnabled;
+            }
+            set
+            {
+                buttonEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         private RelayCommand copyCommand;
         public RelayCommand CopyCommand
         {
@@ -249,15 +265,30 @@ namespace FileProtect.ViewModel
                 return decryptCommand ??
                     (decryptCommand = new RelayCommand(o =>
                     {
-                        if (!string.IsNullOrEmpty(xPath) && !string.IsNullOrEmpty(yPath))
+                        if (WarningMessage.ShowWarning("Are you sure?", "This file will be decrypted with your preferences") == WarningResultType.Continue)
                         {
-                            if (!string.IsNullOrEmpty(kwfhdks))
+                            if (!string.IsNullOrEmpty(xPath) && !string.IsNullOrEmpty(yPath))
                             {
-                                var aastre = App.md5.ComputeHash(Encoding.UTF8.GetBytes(kwfhdks));
-                                string ttart = Convert.ToBase64String(aastre);
+                                if (!string.IsNullOrEmpty(kwfhdks))
+                                {
+                                    var aastre = App.md5.ComputeHash(Encoding.UTF8.GetBytes(kwfhdks));
+                                    string ttart = Convert.ToBase64String(aastre);
 
 
-                                if (settings.ASSKOP() != ttart)
+                                    if (App.Settings.ASSKOP() != ttart)
+                                    {
+                                        SystemSounds.Exclamation.Play();
+                                        InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
+                                        if (writeLogs)
+                                            Logs.WriteLog("WARNING-Entered password incorrect!");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        DecryptAsync();
+                                    }
+                                }
+                                else
                                 {
                                     SystemSounds.Exclamation.Play();
                                     InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
@@ -265,26 +296,18 @@ namespace FileProtect.ViewModel
                                         Logs.WriteLog("WARNING-Entered password incorrect!");
                                     return;
                                 }
-                                else
-                                {
-                                    DecryptAsync();
-                                }
                             }
                             else
                             {
                                 SystemSounds.Exclamation.Play();
-                                InfoMessage.ShowInfo("WARNING", "Entered password incorrect!");
+                                InfoMessage.ShowInfo("WARNING", "All fields must be filled!");
                                 if (writeLogs)
-                                    Logs.WriteLog("WARNING-Entered password incorrect!");
+                                    Logs.WriteLog("WARNING-All fields must be filled!");
                                 return;
                             }
                         }
                         else
                         {
-                            SystemSounds.Exclamation.Play();
-                            InfoMessage.ShowInfo("WARNING", "All fields must be filled!");
-                            if (writeLogs)
-                                Logs.WriteLog("WARNING-All fields must be filled!");
                             return;
                         }
                     }));
@@ -321,6 +344,8 @@ namespace FileProtect.ViewModel
                 {
                     if (writeLogs)
                         Logs.WriteLog("Decrypting has been started!");
+
+                    ButtonEnabled = false;
 
                     string output = $@"{yPath}\{Path.GetFileNameWithoutExtension(xPath)}";
 
@@ -378,6 +403,8 @@ namespace FileProtect.ViewModel
                         Progress = 0;
                         TextProgress = "ERROR-Decrypt uncknown file format!";
 
+                        ButtonEnabled = true;
+
                         if (writeLogs)
                             Logs.WriteLog("ERROR-Decrypt uncknown file format!");
 
@@ -403,11 +430,45 @@ namespace FileProtect.ViewModel
                     if (writeLogs)
                         Logs.WriteLog("7/7 part - decrypting complete!");
 
+                    if (operationWrite)
+                    {
+                        string guid = Guid.NewGuid().ToString();
+                        List<Operation> list;
+                        if (File.Exists($@"{App.MainPath}\File Protect\appcache.json"))
+                        {
+                            list = OperationManipulator.Read($@"{App.MainPath}\File Protect\appcache.json");
+                            Logs.WriteLog($"\"{App.MainPath}\\File Protect\\appcache.json\" has been readed!");
+                        }
+                        else
+                        {
+                            list = new List<Operation>();
+                        }
+                        Operation operation = new Operation(guid, OperationType.Decrypt, DateTime.Now, xPath, output);
+                        list.Add(operation);
+
+                        OperationManipulator.Write($@"{App.MainPath}\File Protect\appcache.json", list);
+                        Logs.WriteLog($"\"{App.MainPath}\\File Protect\\appcache.json\" has been writed!");
+                    }
+
+                    ButtonEnabled = true;
+
                     if (writeLogs)
                         Logs.WriteLog("Decoding complete!");
                 }
+                catch (FileNotFoundException)
+                {
+                    ButtonEnabled = true;
+
+                    Progress = 0;
+                    TextProgress = "This file don't exist!";
+                }
                 catch (Exception ex)
                 {
+                    ButtonEnabled = true;
+
+                    Progress = 0;
+                    TextProgress = "Unknown error. Send files to email in settings page to help fix bugs! thx";
+
                     ErrorWriter.WriteError(ex);
                 }
             });

@@ -18,6 +18,8 @@ namespace FileProtect.Model
         public static void Write(string path, Settings dataObject)
         {
             var jsonSerializer = new DataContractJsonSerializer(typeof(Settings));
+            if (File.Exists(path)) File.Delete(path);
+
             using (FileStream fs = new FileStream(path, FileMode.Create))
             {
                 jsonSerializer.WriteObject(fs, dataObject);

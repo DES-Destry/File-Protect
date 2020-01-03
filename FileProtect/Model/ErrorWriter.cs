@@ -7,7 +7,7 @@ namespace FileProtect.Model
     {
         public static void WriteError(Exception exception)
         {
-            if (App.Settings == null || App.Settings.WriteErrorFiles == true)
+            if (App.Settings == null || App.Settings.WriteErrorFiles)
             {
                 ErrorManipulator.WriteError(exception, $@"{App.MainPath}\File Protect\{DateTime.Now.ToString("MMddyyyyHHmmss")}-{exception.HResult}.err");
 

@@ -10,7 +10,7 @@
       Title="Main">
 
     <Grid>
-        <Image x:Name="MainImage"
+        <Image Source="/Images/WhiteHomePage.png"
                Width="180"
                Height="180"
                HorizontalAlignment="Left"
@@ -25,9 +25,9 @@
                    FontFamily="{StaticResource BaseFont}"
                    Foreground="{StaticResource WhiteBrush}"/>
 
-        <TextBlock Text="early v1.0.0"
+        <TextBlock Text="pre-release v0.9.0"
                    Height="24"
-                   Width="124"
+                   Width="182"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom"
                    FontSize="{StaticResource Small}"

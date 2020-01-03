@@ -12,7 +12,6 @@ namespace FileProtect.Pages
             try
             {
                 InitializeComponent();
-                MainImage.Source = new BitmapImage(new Uri(Environment.CurrentDirectory + "\\images\\WhiteHomePage.png"));
             }
             catch (Exception ex)
             {

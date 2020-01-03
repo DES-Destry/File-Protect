@@ -16,6 +16,7 @@ namespace FileProtect.ViewModel
         private Page decryptPage;
         private Page settingsPage;
 
+
         private Page currentPage;
         public Page CurrentPage
         {
@@ -110,19 +111,20 @@ namespace FileProtect.ViewModel
                 using (var key = Registry.ClassesRoot)
                 {
                     key.OpenSubKey(".meta");
-                    key.SetValue(null, "Folder encoding metadata.");
+                    key.SetValue("", "Folder encoding metadata.");
                 }
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
             try
             {
                 using (var key = Registry.ClassesRoot)
                 {
                     key.OpenSubKey(".err");
-                    key.SetValue(null, "App *ERROR* file");
+                    key.SetValue("", "App *ERROR* file");
                 }
             }
-            catch(Exception ex) { }
+            catch (Exception ex) { }
+
             try
             {
                 if (!Directory.Exists($"{App.MainPath}"))
@@ -138,6 +140,11 @@ namespace FileProtect.ViewModel
                     }
                     else
                     {
+                        if (!File.Exists($@"{App.MainPath}\File Protect\.log"))
+                        {
+                            File.Create($@"{App.MainPath}\File Protect\.log").Close();
+                            Logs.WriteLog($"\"{App.MainPath}\\File Protect\\.log\" has been created!");
+                        }
                         if (!File.Exists($@"{App.MainPath}\File Protect\appsettings.json"))
                         {
                             Logs.WriteLog("Application starts working!");
@@ -171,7 +178,7 @@ namespace FileProtect.ViewModel
 
                 Logs.WriteLog("Main page has been selected");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 ErrorWriter.WriteError(ex);
             }

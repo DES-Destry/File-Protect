@@ -34,6 +34,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FileProtect.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DESTRY.IO.Errors">
       <HintPath>..\..\DESTRY.IO.Errors\DESTRY.IO.Errors\bin\Debug\DESTRY.IO.Errors.dll</HintPath>
@@ -68,9 +71,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Messages\WarningMessage.xaml.cs">
+      <DependentUpon>WarningMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Logs.cs" />
     <Compile Include="Model\Meta.cs" />
     <Compile Include="Model\MetaManipulator.cs" />
+    <Compile Include="Model\OperationManipulator.cs" />
+    <Compile Include="Model\WarningResultType.cs" />
     <Compile Include="Pages\Encrypt.xaml.cs">
       <DependentUpon>Encrypt.xaml</DependentUpon>
     </Compile>
@@ -81,11 +89,20 @@
       <DependentUpon>Settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DecryptViewModel.cs" />
+    <Compile Include="ViewModel\EmailViewModel.cs" />
     <Compile Include="ViewModel\EncryptViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="View\PasswordReq.xaml.cs">
       <DependentUpon>PasswordReq.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\SendEmail.xaml.cs">
+      <DependentUpon>SendEmail.xaml</DependentUpon>
+    </Compile>
     <Page Include="Messages\InfoMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Messages\WarningMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +180,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\SendEmail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -191,6 +212,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\WhiteHomePage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WhiteDecrypt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WhiteEncrypt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\WhiteSettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FileProtect.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -2,7 +2,7 @@
 {
     enum OperationType
     {
-        Crypt,
+        Encrypt,
         Decrypt,
         MusicCrypt,
         MusicDecrypt,

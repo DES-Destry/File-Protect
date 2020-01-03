@@ -30,7 +30,7 @@ namespace FileProtect.View
 
         private void OK(object sender, RoutedEventArgs e)
         {
-            if (NewPassword.Password == RepeatPassword.Password && NewPassword.Password.Length > 6)
+            if (NewPassword.Password == RepeatPassword.Password && NewPassword.Password.Length >= 6)
             {
                 Close();
             }

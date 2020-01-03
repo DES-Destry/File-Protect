@@ -10,7 +10,7 @@
       Title="Settings">
 
     <Grid>
-        <Image x:Name="MainImage"
+        <Image Source="/Images/WhiteSettings.png"
                Width="180"
                Height="180"
                HorizontalAlignment="Left"
@@ -24,5 +24,145 @@
                    FontSize="{StaticResource H3}"
                    FontFamily="{StaticResource BaseFont}"
                    Foreground="{StaticResource WhiteBrush}"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding ApplyCommand}"
+                Height="50"
+                Content="Apply settings"
+                VerticalAlignment="Bottom"
+                Margin="10,0,10,10"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding CancelCommand}"
+                Height="50"
+                Width="485"
+                Content="Cancel settings changes"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="10,0,0,70"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding StandartCommand}"
+                Height="50"
+                Width="485"
+                Content="Set standart settings"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="10,10,10,70"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding ResetSettingsCommand}"
+                Height="50"
+                Width="238"
+                Content="Reset settings"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="10,0,0,515"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding ClearLogsCommand}"
+                Height="50"
+                Width="237.5"
+                Content="Clear logs"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="257.5,0,0,515"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding ChangePasswordCommand}"
+                Height="50"
+                Width="237.5"
+                Content="Change password"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="0,0,10,515"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding DeleteErrorCommand}"
+                Height="50"
+                Width="237.5"
+                Content="Delete error files"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="0,0,257.5,515"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding DeleteAllCommand}"
+                Height="50"
+                Width="485"
+                Content="Delete all data"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="10,0,0,455"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding DeleteStoryCommand}"
+                Height="50"
+                Width="485"
+                Content="Delete operation story"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Margin="10,10,10,455"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding SendCommand}"
+                Height="50"
+                Content="Send message to support mail"
+                VerticalAlignment="Bottom"
+                Margin="10,0,10,395"/>
+
+        <CheckBox Style="{StaticResource BaseCheckBox}"
+                  IsChecked="{Binding DelOldData}"
+                  Content="Delete old data before deleting"
+                  Height="25"
+                  Width="375"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="10,0,0,360"/>
+
+        <CheckBox Style="{StaticResource BaseCheckBox}"
+                  IsChecked="{Binding SaveOperations}"
+                  Content="Save operation story"
+                  Height="25"
+                  Width="255"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="415,0,0,360"/>
+
+        <CheckBox Style="{StaticResource BaseCheckBox}"
+                  IsChecked="{Binding WriteErrors}"
+                  Content="Write error files"
+                  Height="25"
+                  Width="220"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="700,0,0,360"/>
+
+        <CheckBox Style="{StaticResource BaseCheckBox}"
+                  IsChecked="{Binding WarningMessages}"
+                  Content="Show 'Are you sure?' messages"
+                  Height="25"
+                  Width="375"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="10,0,0,325"/>
+
+        <CheckBox Style="{StaticResource BaseCheckBox}"
+                  IsChecked="{Binding CheckUpdates}"
+                  Content="Check updates(n wor)"
+                  Height="25"
+                  Width="255"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="415,0,0,325"/>
+
+        <CheckBox Style="{StaticResource BaseCheckBox}"
+                  IsChecked="{Binding WriteLogs}"
+                  Content="Write logs"
+                  Height="25"
+                  Width="220"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  Margin="700,0,0,325"/>
     </Grid>
 </Page>

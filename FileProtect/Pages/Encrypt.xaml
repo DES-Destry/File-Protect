@@ -23,7 +23,7 @@
           Height="763" 
           VerticalAlignment="Bottom">
 
-        <Image x:Name="MainImage"
+        <Image Source="/Images/WhiteEncrypt.png"
                Width="180"
                Height="180"
                HorizontalAlignment="Left"
@@ -133,7 +133,8 @@
                 Content="Start encrypt"
                 Height="60"
                 VerticalAlignment="Bottom" 
-                Margin="10,0,10,10"/>
+                Margin="10,0,10,10"
+                IsEnabled="{Binding ButtonEnabled}"/>
 
     </Grid>
 

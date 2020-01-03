@@ -22,9 +22,9 @@ namespace FileProtect.Model
                     return;
                 }
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                ErrorWriter.WriteError(ex);
+                
             }
         }
     }
