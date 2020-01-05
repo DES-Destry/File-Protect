@@ -416,6 +416,21 @@ namespace FileProtect.ViewModel
         }
 
 
+        private RelayCommand checkUpdatesCommand;
+        public RelayCommand CheckUpdatesCommand
+        {
+            get
+            {
+                return checkUpdatesCommand ??
+                    (checkUpdatesCommand = new RelayCommand(obj =>
+                    {
+                        UpdateChecker uc = new UpdateChecker();
+                        uc.ShowDialog();
+                    }));
+            }
+        }
+
+
         public SettingsViewModel()
         {
             currentSettings = App.Settings;

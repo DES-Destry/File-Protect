@@ -107,7 +107,18 @@
         <Button Style="{StaticResource BaseButton}"
                 Command="{Binding SendCommand}"
                 Height="50"
+                Width="485"
+                HorizontalAlignment="Left"
                 Content="Send message to support mail"
+                VerticalAlignment="Bottom"
+                Margin="10,0,10,395"/>
+
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding CheckUpdatesCommand}"
+                Height="50"
+                Width="485"
+                HorizontalAlignment="Right"
+                Content="Check updates"
                 VerticalAlignment="Bottom"
                 Margin="10,0,10,395"/>
 
@@ -149,7 +160,7 @@
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding CheckUpdates}"
-                  Content="Check updates(n wor)"
+                  Content="Check updates"
                   Height="25"
                   Width="255"
                   HorizontalAlignment="Left"

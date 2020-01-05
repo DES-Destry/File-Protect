@@ -1,4 +1,5 @@
 ﻿using FileProtect.Model;
+using FileProtect.View;
 using Microsoft.Win32;
 using System;
 using System.IO;
@@ -11,10 +12,10 @@ namespace FileProtect.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
-        private Page mainPage;
-        private Page cryptPage;
-        private Page decryptPage;
-        private Page settingsPage;
+        private readonly Page mainPage;
+        private readonly Page cryptPage;
+        private readonly Page decryptPage;
+        private readonly Page settingsPage;
 
 
         private Page currentPage;
@@ -108,25 +109,6 @@ namespace FileProtect.ViewModel
         {
             try
             {
-                using (var key = Registry.ClassesRoot)
-                {
-                    key.OpenSubKey(".meta");
-                    key.SetValue("", "Folder encoding metadata.");
-                }
-            }
-            catch (Exception ex) { }
-            try
-            {
-                using (var key = Registry.ClassesRoot)
-                {
-                    key.OpenSubKey(".err");
-                    key.SetValue("", "App *ERROR* file");
-                }
-            }
-            catch (Exception ex) { }
-
-            try
-            {
                 if (!Directory.Exists($"{App.MainPath}"))
                 {
                     Directory.CreateDirectory($"{App.MainPath}");
@@ -162,6 +144,12 @@ namespace FileProtect.ViewModel
 
                             Logs.WriteLog("Password request window has been opened!");
                             passwordReq.ShowDialog();
+
+                            if(App.Settings == null || App.Settings.CheckUpdates)
+                            {
+                                UpdateChecker uc = new UpdateChecker();
+                                uc.ShowDialog();
+                            }
                         }
                     }
                 }
