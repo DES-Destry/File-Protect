@@ -10,8 +10,8 @@ namespace FileProtect
         {
             try
             {
-                DataContext = new ViewModel.MainViewModel();
                 InitializeComponent();
+                DataContext = new ViewModel.MainViewModel();
             }
             catch (Exception ex)
             {

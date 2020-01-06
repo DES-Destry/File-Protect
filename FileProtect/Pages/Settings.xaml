@@ -1,13 +1,18 @@
-﻿<Page x:Class="FileProtect.Pages.Settings"
-      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Page xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FileProtect.Pages"
+      xmlns:ViewModel="clr-namespace:FileProtect.ViewModel" 
+      x:Class="FileProtect.Pages.Settings"
       mc:Ignorable="d" 
       d:DesignHeight="750" 
       d:DesignWidth="1000"
       Title="Settings">
+
+    <Page.DataContext>
+        <ViewModel:SettingsViewModel/>
+    </Page.DataContext>
 
     <Grid>
         <Image Source="/Images/WhiteSettings.png"
@@ -122,6 +127,13 @@
                 VerticalAlignment="Bottom"
                 Margin="10,0,10,395"/>
 
+        <Button Style="{StaticResource BaseButton}"
+                Command="{Binding UninstallCommand}"
+                Height="50"
+                Content="Full application uninstall"
+                VerticalAlignment="Bottom"
+                Margin="10,0,10,335"/>
+
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding DelOldData}"
                   Content="Delete old data before deleting"
@@ -129,7 +141,7 @@
                   Width="375"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Margin="10,0,0,360"/>
+                  Margin="10,0,0,300"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding SaveOperations}"
@@ -138,7 +150,7 @@
                   Width="255"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Margin="415,0,0,360"/>
+                  Margin="415,0,0,300"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding WriteErrors}"
@@ -147,7 +159,7 @@
                   Width="220"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Margin="700,0,0,360"/>
+                  Margin="700,0,0,300"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding WarningMessages}"
@@ -156,7 +168,7 @@
                   Width="375"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Margin="10,0,0,325"/>
+                  Margin="10,0,0,265"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding CheckUpdates}"
@@ -165,7 +177,7 @@
                   Width="255"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Margin="415,0,0,325"/>
+                  Margin="415,0,0,265"/>
 
         <CheckBox Style="{StaticResource BaseCheckBox}"
                   IsChecked="{Binding WriteLogs}"
@@ -174,6 +186,6 @@
                   Width="220"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Bottom"
-                  Margin="700,0,0,325"/>
+                  Margin="700,0,0,265"/>
     </Grid>
 </Page>

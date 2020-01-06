@@ -2,6 +2,7 @@
 using FileProtect.Model;
 using FileProtect.View;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 
@@ -385,7 +386,7 @@ namespace FileProtect.ViewModel
                                 return;
                             }
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             ErrorWriter.WriteError(ex);
                         }
@@ -407,7 +408,7 @@ namespace FileProtect.ViewModel
                             SendEmail email = new SendEmail();
                             email.ShowDialog();
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             ErrorWriter.WriteError(ex);
                         }
@@ -426,6 +427,28 @@ namespace FileProtect.ViewModel
                     {
                         UpdateChecker uc = new UpdateChecker();
                         uc.ShowDialog();
+                    }));
+            }
+        }
+
+
+        private RelayCommand uninstallCommand;
+        public RelayCommand UninstallCommand
+        {
+            get
+            {
+                return uninstallCommand ??
+                    (uninstallCommand = new RelayCommand(obj =>
+                    {
+                        if (WarningMessage.ShowWarning("Are you sure?", "This application will fully uninstall!") == WarningResultType.Continue && File.Exists($"{Environment.CurrentDirectory}\\FileProtectUninstall.exe"))
+                        {
+                            Process.Start($"{Environment.CurrentDirectory}\\FileProtectUninstall.exe");
+
+                            Logs.WriteLog($"\"{Environment.CurrentDirectory}\\FileProtectUninstall.exe\" has been started!");
+                            Logs.WriteLog("The app has been turned off");
+
+                            Application.Current.Shutdown();
+                        }
                     }));
             }
         }

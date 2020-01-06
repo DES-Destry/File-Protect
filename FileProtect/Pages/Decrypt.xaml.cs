@@ -8,7 +8,6 @@ namespace FileProtect.Pages
         public Decrypt()
         {
             InitializeComponent();
-            DataContext = new DecryptViewModel();
         }
 
         private void ChangedGGDAFR(object sender, System.Windows.RoutedEventArgs e)

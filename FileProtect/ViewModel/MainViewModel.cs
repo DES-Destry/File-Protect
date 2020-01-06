@@ -1,6 +1,5 @@
 ﻿using FileProtect.Model;
 using FileProtect.View;
-using Microsoft.Win32;
 using System;
 using System.IO;
 using System.Threading;
@@ -144,12 +143,6 @@ namespace FileProtect.ViewModel
 
                             Logs.WriteLog("Password request window has been opened!");
                             passwordReq.ShowDialog();
-
-                            if(App.Settings == null || App.Settings.CheckUpdates)
-                            {
-                                UpdateChecker uc = new UpdateChecker();
-                                uc.ShowDialog();
-                            }
                         }
                     }
                 }
@@ -163,6 +156,23 @@ namespace FileProtect.ViewModel
 
                 FrameOpacity = 1;
                 currentPage = mainPage;
+
+                if (Directory.Exists($"{Environment.CurrentDirectory}\\UPDATE"))
+                {
+                    string[] files = Directory.GetDirectories($"{Environment.CurrentDirectory}\\UPDATE");
+                    foreach (string file in files)
+                    {
+                        File.Move(file, $"{Environment.CurrentDirectory}\\{Path.GetFileName(file)}");
+                    }
+
+                    Directory.Delete($"{Environment.CurrentDirectory}\\UPDATE");
+                }
+
+                if (App.Settings == null || App.Settings.CheckUpdates)
+                {
+                    UpdateChecker uc = new UpdateChecker();
+                    uc.ShowDialog();
+                }
 
                 Logs.WriteLog("Main page has been selected");
             }
@@ -187,7 +197,7 @@ namespace FileProtect.ViewModel
             createPass.ShowDialog();
         }
 
-        private async Task ChangePage(Page page)
+        private async void ChangePage(Page page)
         {
             await Task.Factory.StartNew(() =>
             {
