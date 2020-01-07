@@ -9,7 +9,6 @@ namespace FileProtect.View
         public CreatePass()
         {
             InitializeComponent();
-            DataContext = new CreatePassViewModel();
         }
 
         private void NewPasswordChanged(object sender, RoutedEventArgs e)

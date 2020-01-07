@@ -10,10 +10,6 @@
       d:DesignWidth="1000"
       Title="Settings">
 
-    <Page.DataContext>
-        <ViewModel:SettingsViewModel/>
-    </Page.DataContext>
-
     <Grid>
         <Image Source="/Images/WhiteSettings.png"
                Width="180"

@@ -8,7 +8,6 @@ namespace FileProtect.Pages
         public Crypt()
         {
             InitializeComponent();
-            DataContext = new EncryptViewModel();
         }
 
         private void ChangedDATTAH(object sender, System.Windows.RoutedEventArgs e)

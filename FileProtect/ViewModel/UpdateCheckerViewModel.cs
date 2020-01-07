@@ -14,7 +14,7 @@ namespace FileProtect.ViewModel
     class UpdateCheckerViewModel : BaseViewModel
     {
         private ParserWorker<string> parser;
-        private readonly string url = "https://github.com/DES-Destry/DES-Destry.github.io/raw/master/cache/FIle%20Protect%20v0.9.5.zip";
+        private readonly string url = "https://github.com/DES-Destry/DES-Destry.github.io/raw/master/cache/FileProtectLastVesion.zip";  
         private string size = default;
         private string sizeKB = default;
         private bool completed = false;

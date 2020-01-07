@@ -1,19 +1,10 @@
-﻿using FileProtect.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace FileProtect.View
 {
     public partial class SendEmail : Window
     {
-        public SendEmail()
-        {
-            InitializeComponent();
-            DataContext = new EmailViewModel();
-        }
-
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
+        public SendEmail() { InitializeComponent(); }
+        private void Cancel_Click(object sender, RoutedEventArgs e) { this.Close(); }
     }
 }

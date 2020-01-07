@@ -1,9 +1,10 @@
-﻿<Window x:Class="FileProtect.View.SendEmail"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FileProtect.View"
+        xmlns:ViewModel="clr-namespace:FileProtect.ViewModel" 
+        x:Class="FileProtect.View.SendEmail"
         mc:Ignorable="d"
         Title="SendEmail" 
         Height="655"
@@ -13,6 +14,10 @@
         ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" 
         ShowInTaskbar="False">
+
+    <Window.DataContext>
+        <ViewModel:EmailViewModel/>
+    </Window.DataContext>
 
     <Border Background="Transparent" 
             BorderBrush="{StaticResource WhiteBrush}" 
@@ -26,9 +31,10 @@
                        Foreground="{StaticResource WhiteBrush}"
                        FontFamily="{StaticResource BaseFont}"
                        FontSize="{StaticResource H3}"/>
-            
+
             <TextBox Style="{StaticResource TextBoxBase}"
                      Text="{Binding From, Mode=TwoWay}"
+                     TextAlignment="Center"
                      Tag="Your email address(not necessary)"
                      Height="50" 
                      HorizontalAlignment="Left" 
@@ -38,6 +44,7 @@
 
             <TextBox Style="{StaticResource TextBoxBase}"
                      Text="{Binding Comment, Mode=TwoWay}"
+                     TextAlignment="Center"
                      Tag="Comment(not necessary)"
                      Height="353" 
                      HorizontalAlignment="Left" 
