@@ -159,9 +159,13 @@ namespace FileProtect.ViewModel
 
                 if (Directory.Exists($"{Environment.CurrentDirectory}\\UPDATE"))
                 {
-                    string[] files = Directory.GetDirectories($"{Environment.CurrentDirectory}\\UPDATE");
+                    string[] files = Directory.GetFiles($"{Environment.CurrentDirectory}\\UPDATE");
                     foreach (string file in files)
                     {
+                        if(File.Exists($"{Environment.CurrentDirectory}\\{Path.GetFileName(file)}"))
+                        {
+                            File.Delete($"{Environment.CurrentDirectory}\\{Path.GetFileName(file)}");
+                        }
                         File.Move(file, $"{Environment.CurrentDirectory}\\{Path.GetFileName(file)}");
                     }
 

@@ -14,7 +14,7 @@ namespace FileProtect.ViewModel
     class UpdateCheckerViewModel : BaseViewModel
     {
         private ParserWorker<string> parser;
-        private readonly string url = "https://github.com/DES-Destry/DES-Destry.github.io/raw/master/cache/FileProtectLastVesion.zip";  
+        private readonly string url = "https://github.com/DES-Destry/DES-Destry.github.io/raw/master/cache/FileProtectLastVersion.zip";  
         private string size = default;
         private string sizeKB = default;
         private bool completed = false;
@@ -141,7 +141,7 @@ namespace FileProtect.ViewModel
                 MaxProgress = 2;
                 Progress = 1;
 
-                parser.Start();
+                Parsing();
             }
             catch (Exception ex)
             {
@@ -238,7 +238,7 @@ namespace FileProtect.ViewModel
             {
                 wc.DownloadProgressChanged += OnPercentageChanged;
                 Logs.WriteLog("Download async has been started!");
-                Task.Run(async () => { wc.DownloadFileAsync(new Uri(url), $"{path}\\UPDATE.zip"); }).ConfigureAwait(false);
+                wc.DownloadFileAsync(new Uri(url), $"{path}\\UPDATE.zip");
             }
 
             Logs.WriteLog("Update zip file has been downloaded!");
@@ -298,6 +298,11 @@ namespace FileProtect.ViewModel
                     }
                 }
             });
+        }
+
+        private async void Parsing()
+        {
+            await Task.Run(() => { parser.Start(); });
         }
     }
 }
