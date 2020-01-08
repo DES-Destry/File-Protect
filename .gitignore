@@ -267,4 +267,4 @@ __pycache__/
 
 
 #My conf data
-FileProtect/ViewModel/EmailViewModel.cs
+**/EmailViewModel.cs
