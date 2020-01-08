@@ -15,7 +15,7 @@ namespace FileProtect.ViewModel
     {
         private ParserWorker<string> parser;
         private readonly string url = "https://github.com/DES-Destry/DES-Destry.github.io/raw/master/cache/FileProtectLastVersion.zip";  
-        private string size = default;
+        private long size = default;
         private string sizeKB = default;
         private bool completed = false;
         private bool installed = false;
@@ -189,24 +189,7 @@ namespace FileProtect.ViewModel
                         Logs.WriteLog("Update file has been finded!");
                         Progress = 0;
 
-                        using (WebClient wc = new WebClient())
-                        {
-                            wc.OpenRead(url);
-                            size = wc.ResponseHeaders["Content-Lenght"];
-                        }
-                        Logs.WriteLog("Update file size recivied");
-                        if (int.TryParse(size, out int res))
-                        {
-                            sizeKB = (res / 1024).ToString();
-                            Message = $"A new version has been found. Install? Size:{sizeKB} KB in zip.";
-                        }
-                        else
-                        {
-                            Message = $"A new version has been found. Install? Size: ???";
-                            sizeKB = "???";
-                        }
-
-                        InstallEnabled = true;
+                        CheckSize();
                     }
                 }
             }
@@ -303,6 +286,30 @@ namespace FileProtect.ViewModel
         private async void Parsing()
         {
             await Task.Run(() => { parser.Start(); });
+        }
+
+        private async void CheckSize()
+        {
+            HttpWebRequest request = WebRequest.CreateHttp(url);
+            using(WebResponse response = await request.GetResponseAsync())
+            {
+                size = response.ContentLength;
+                long shortSize = size / 1024;
+                sizeKB = shortSize.ToString();
+
+                Logs.WriteLog("Update file size recivied");
+                if (!string.IsNullOrEmpty(sizeKB))
+                {
+                    Message = $"A new version has been found. Install? Size: {sizeKB} KB in zip.";
+                }
+                else
+                {
+                    Message = $"A new version has been found. Install? Size: ???";
+                    sizeKB = "???";
+                }
+
+                InstallEnabled = true;
+            }
         }
     }
 }

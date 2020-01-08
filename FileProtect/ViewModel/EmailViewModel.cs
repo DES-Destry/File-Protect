@@ -115,7 +115,7 @@ namespace FileProtect.ViewModel
                     State = "Sending...";
                     ButtonEnabled = false;
 
-                    client.Credentials = new NetworkCredential(to, "kwda101vrs");
+                    client.Credentials = new NetworkCredential(to, ",PPUToai5tu2");
                     client.EnableSsl = true;
                     client.Timeout = 60000;
 

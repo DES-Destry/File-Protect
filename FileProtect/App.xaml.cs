@@ -9,7 +9,7 @@ namespace FileProtect
     {
         public static readonly string MainPath = $@"{Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)}\DES Destry";
         public static readonly MD5 md5 = MD5.Create();
-        public static readonly string Version = "v0.9.7";
+        public static readonly string Version = "v0.9.71";
         public static Settings Settings { get; set; }
 
         public static void UpdateSettings(Settings settings)

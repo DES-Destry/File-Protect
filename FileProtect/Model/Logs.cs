@@ -9,7 +9,7 @@ namespace FileProtect.Model
         {
             try
             {
-                if (App.Settings == null || App.Settings.WriteLogs == true)
+                if (App.Settings == null || App.Settings.WriteLogs)
                 {
                     using (StreamWriter sw = new StreamWriter($@"{App.MainPath}\File Protect\.log", true))
                     {
