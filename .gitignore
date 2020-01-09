@@ -264,7 +264,3 @@ __pycache__/
 
 #My Files
 *.md
-
-
-#My conf data
-**/EmailViewModel.cs

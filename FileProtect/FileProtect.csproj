@@ -71,6 +71,9 @@
     <Reference Include="DESTRY.IO.Errors">
       <HintPath>..\..\DESTRY.IO.Errors\DESTRY.IO.Errors\bin\Debug\DESTRY.IO.Errors.dll</HintPath>
     </Reference>
+    <Reference Include="DESTRY.Net.Emails">
+      <HintPath>..\..\DESTRY.Net.Emails\DESTRY.Net.Emails\bin\Debug\DESTRY.Net.Emails.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
       <HintPath>..\packages\Ionic.Zip.1.9.1.8\lib\Ionic.Zip.dll</HintPath>
     </Reference>
