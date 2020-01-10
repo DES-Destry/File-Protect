@@ -25,7 +25,7 @@
                    FontFamily="{StaticResource BaseFont}"
                    Foreground="{StaticResource WhiteBrush}"/>
 
-        <TextBlock Text="pre-release v0.9.72"
+        <TextBlock Text="pre-release v0.9.73"
                    Height="24"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Bottom"

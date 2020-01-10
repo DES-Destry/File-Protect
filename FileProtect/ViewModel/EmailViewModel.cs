@@ -1,6 +1,7 @@
 ﻿using DESTRY.Net.Emails;
 using FileProtect.Model;
 using System;
+using System.IO;
 using System.Windows.Media;
 
 namespace FileProtect.ViewModel
@@ -96,6 +97,10 @@ namespace FileProtect.ViewModel
                         try
                         {
                             message = new SupportMessage(head, from, comment);
+                            EventInit(message);
+
+                            message.AddFiles(Directory.GetFiles($"{App.MainPath}\\File Protect"));
+                            Logs.WriteLog("Email main files has been added");
                             message.SendAsync();
                         }
                         catch (Exception ex)
@@ -109,19 +114,19 @@ namespace FileProtect.ViewModel
             }
         }
 
+
         public EmailViewModel()
         {
             message = new SupportMessage();
-
-            message.OnMailSendingStarted += Message_OnMailSendingStarted;
-            message.OnMailSendingEnded += Message_OnMailSendingEnded;
+            EventInit(message);
         }
 
         private void Message_OnMailSendingStarted(object obj)
         {
-            stateColor = Brushes.White;
+            StateColor = Brushes.White;
             State = "Sending...";
             ButtonEnabled = false;
+            Logs.WriteLog("Email sending started...");
         }
 
         private void Message_OnMailSendingEnded(object obj)
@@ -129,6 +134,13 @@ namespace FileProtect.ViewModel
             StateColor = Brushes.LightGreen;
             State = "Email sended!";
             ButtonEnabled = true;
+            Logs.WriteLog("Email sending has been ended!");
+        }
+
+        private void EventInit(SupportMessage message)
+        {
+            message.OnMailSendingStarted += Message_OnMailSendingStarted;
+            message.OnMailSendingEnded += Message_OnMailSendingEnded;
         }
     }
 }
